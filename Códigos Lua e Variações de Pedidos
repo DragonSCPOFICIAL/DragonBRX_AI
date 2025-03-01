@@ -1,0 +1,1022 @@
+# Códigos Lua e Variações de Pedidos
+
+## Estruturas Básicas
+
+### Variáveis e Tipos de Dados
+
+**P: Como declarar variáveis em Lua?**
+R:
+```lua
+-- Declaração de variáveis em Lua
+local nome = "Maria"  -- string
+local idade = 25      -- número
+local ativo = true    -- booleano
+local salario = 1250.50  -- número decimal
+local dados = nil     -- nil (nulo)
+```
+
+**P: Como criar tabelas em Lua?**
+R:
+```lua
+-- Criação de tabelas em Lua
+local pessoa = {}  -- tabela vazia
+pessoa.nome = "João"
+pessoa.idade = 30
+
+-- Ou de forma direta
+local aluno = {
+    nome = "Carlos",
+    notas = {7.5, 8.0, 9.2},
+    aprovado = true
+}
+```
+
+### Estruturas de Controle
+
+**P: Como criar uma estrutura condicional em Lua?**
+R:
+```lua
+-- Estrutura if-else em Lua
+local idade = 17
+
+if idade >= 18 then
+    print("Maior de idade")
+elseif idade >= 16 then
+    print("Pode votar, mas não pode dirigir")
+else
+    print("Menor de idade")
+end
+```
+
+**P: Como fazer loops em Lua?**
+R:
+```lua
+-- Loop numérico (for)
+for i = 1, 10, 1 do  -- início, fim, passo
+    print(i)
+end
+
+-- Loop while
+local contador = 1
+while contador <= 5 do
+    print(contador)
+    contador = contador + 1
+end
+
+-- Loop repeat-until
+local x = 1
+repeat
+    print(x)
+    x = x + 1
+until x > 5
+```
+
+## Funções
+
+**P: Como criar funções em Lua?**
+R:
+```lua
+-- Função simples
+function saudacao(nome)
+    return "Olá, " .. nome .. "!"
+end
+
+print(saudacao("Lucas"))  -- Imprime: Olá, Lucas!
+
+-- Função local
+local function calcularArea(largura, altura)
+    return largura * altura
+end
+
+print(calcularArea(5, 3))  -- Imprime: 15
+
+-- Função anônima (lambda)
+local dobrar = function(x)
+    return x * 2
+end
+
+print(dobrar(5))  -- Imprime: 10
+```
+
+**P: Como criar funções com número variável de argumentos?**
+R:
+```lua
+-- Função com número variável de argumentos
+function media(...)
+    local args = {...}
+    local soma = 0
+    
+    for i, valor in ipairs(args) do
+        soma = soma + valor
+    end
+    
+    return soma / #args
+end
+
+print(media(10, 20, 30, 40))  -- Imprime: 25
+```
+
+## Programação Orientada a Objetos
+
+**P: Como implementar classes e objetos em Lua?**
+R:
+```lua
+-- Classe em Lua usando tabelas e metatabelas
+local Pessoa = {}
+Pessoa.__index = Pessoa
+
+function Pessoa.novo(nome, idade)
+    local self = setmetatable({}, Pessoa)
+    self.nome = nome
+    self.idade = idade
+    return self
+end
+
+function Pessoa:apresentar()
+    return string.format("Olá, meu nome é %s e tenho %d anos.", self.nome, self.idade)
+end
+
+-- Uso
+local joao = Pessoa.novo("João", 30)
+print(joao:apresentar())  -- Imprime: Olá, meu nome é João e tenho 30 anos.
+```
+
+**P: Como implementar herança em Lua?**
+R:
+```lua
+-- Classe base
+local Animal = {}
+Animal.__index = Animal
+
+function Animal.novo(nome)
+    local self = setmetatable({}, Animal)
+    self.nome = nome
+    return self
+end
+
+function Animal:fazerSom()
+    return "Som genérico"
+end
+
+-- Classe derivada
+local Gato = {}
+Gato.__index = Gato
+setmetatable(Gato, {__index = Animal})  -- Herança
+
+function Gato.novo(nome)
+    local self = setmetatable(Animal.novo(nome), Gato)
+    return self
+end
+
+function Gato:fazerSom()
+    return "Miau!"
+end
+
+-- Uso
+local meuGato = Gato.novo("Whiskers")
+print(meuGato.nome)       -- Imprime: Whiskers
+print(meuGato:fazerSom()) -- Imprime: Miau!
+```
+
+## Manipulação de Strings
+
+**P: Como manipular strings em Lua?**
+R:
+```lua
+-- Operações básicas com strings
+local s1 = "Lua"
+local s2 = "Programação"
+local s3 = s1 .. " " .. s2  -- Concatenação
+
+print(string.len(s3))       -- Imprime: 14 (comprimento)
+print(string.upper(s1))     -- Imprime: LUA
+print(string.lower(s2))     -- Imprime: programação
+print(string.sub(s3, 1, 3)) -- Imprime: Lua (substring)
+print(string.find(s3, "Pro")) -- Imprime: 5 (posição)
+print(string.gsub(s3, "Lua", "Python")) -- Substitui: Python Programação
+```
+
+**P: Como usar padrões (patterns) em Lua?**
+R:
+```lua
+-- Uso de padrões para busca e substituição
+local texto = "Lua é uma linguagem poderosa para 2023!"
+
+-- Buscar palavras
+for palavra in string.gmatch(texto, "%a+") do
+    print(palavra)
+end
+
+-- Buscar números
+for numero in string.gmatch(texto, "%d+") do
+    print(numero)  -- Imprime: 2023
+end
+
+-- Substituir padrões
+local resultado = string.gsub(texto, "%d+", "2024")
+print(resultado)  -- Imprime: Lua é uma linguagem poderosa para 2024!
+```
+
+## Manipulação de Arquivos
+
+**P: Como ler e escrever em arquivos em Lua?**
+R:
+```lua
+-- Escrita em arquivo
+local arquivo = io.open("dados.txt", "w")
+if arquivo then
+    arquivo:write("Olá, Mundo!\n")
+    arquivo:write("Programação em Lua")
+    arquivo:close()
+end
+
+-- Leitura de arquivo completo
+local arquivo = io.open("dados.txt", "r")
+if arquivo then
+    local conteudo = arquivo:read("*a")  -- Lê todo o arquivo
+    print(conteudo)
+    arquivo:close()
+end
+
+-- Leitura linha por linha
+local arquivo = io.open("dados.txt", "r")
+if arquivo then
+    for linha in arquivo:lines() do
+        print(linha)
+    end
+    arquivo:close()
+end
+```
+
+## Módulos e Pacotes
+
+**P: Como criar e usar módulos em Lua?**
+R:
+```lua
+-- Arquivo: utils.lua
+local utils = {}
+
+function utils.somar(a, b)
+    return a + b
+end
+
+function utils.subtrair(a, b)
+    return a - b
+end
+
+return utils
+
+-- Arquivo: main.lua
+local utils = require("utils")
+
+print(utils.somar(10, 5))     -- Imprime: 15
+print(utils.subtrair(10, 5))  -- Imprime: 5
+```
+
+## Manipulação de Tabelas
+
+**P: Como trabalhar com tabelas em Lua?**
+R:
+```lua
+-- Criação e manipulação de tabelas
+local frutas = {"maçã", "banana", "laranja"}
+
+-- Acesso por índice
+print(frutas[1])  -- Imprime: maçã (Lua usa índice começando em 1)
+
+-- Inserção
+table.insert(frutas, "uva")
+table.insert(frutas, 2, "pêra")  -- Insere na posição 2
+
+-- Remoção
+table.remove(frutas, 3)  -- Remove o elemento da posição 3
+
+-- Concatenação
+local texto = table.concat(frutas, ", ")
+print(texto)  -- Imprime: maçã, pêra, laranja, uva
+
+-- Tamanho da tabela
+print(#frutas)  -- Imprime: 4
+```
+
+**P: Como usar tabelas como dicionários em Lua?**
+R:
+```lua
+-- Tabela como dicionário (map)
+local pessoa = {
+    nome = "Ana",
+    idade = 28,
+    profissao = "Engenheira"
+}
+
+-- Acesso por chave
+print(pessoa.nome)  -- Imprime: Ana
+print(pessoa["idade"])  -- Imprime: 28
+
+-- Iteração com pairs
+for chave, valor in pairs(pessoa) do
+    print(chave .. ": " .. tostring(valor))
+end
+```
+
+## Corrotinas
+
+**P: Como usar corrotinas em Lua?**
+R:
+```lua
+-- Definição e uso de corrotinas
+local function contador(inicio, fim)
+    for i = inicio, fim do
+        coroutine.yield(i)
+    end
+end
+
+local co = coroutine.create(contador)
+
+-- Execução em etapas
+local status, valor = coroutine.resume(co, 1, 5)
+while status do
+    print(valor)  -- Imprime os valores 1, 2, 3, 4, 5 em chamadas sucessivas
+    status, valor = coroutine.resume(co)
+end
+
+-- Uso com wrap
+local counter = coroutine.wrap(function(inicio, fim)
+    for i = inicio, fim do
+        coroutine.yield(i)
+    end
+end)
+
+for i in function() return counter(1, 3) end do
+    print(i)  -- Imprime: 1, 2, 3
+end
+```
+
+## Gerenciamento de Erros
+
+**P: Como tratar erros em Lua?**
+R:
+```lua
+-- Tratamento de erros com pcall
+local ok, resultado = pcall(function()
+    return 10/0  -- Divisão por zero gera erro
+end)
+
+if ok then
+    print("Resultado:", resultado)
+else
+    print("Erro:", resultado)  -- Imprime mensagem de erro
+end
+
+-- Lançamento de erros
+function dividir(a, b)
+    if b == 0 then
+        error("Divisão por zero não permitida!")
+    end
+    return a / b
+end
+
+local ok, resultado = pcall(dividir, 10, 0)
+if not ok then
+    print("Erro capturado:", resultado)
+end
+```
+
+## Exemplos Específicos
+
+### Jogo Simples
+
+**P: Como criar um jogo simples de adivinhação em Lua?**
+R:
+```lua
+-- Jogo de adivinhação
+math.randomseed(os.time())  -- Inicializa o gerador de números aleatórios
+local numeroSecreto = math.random(1, 100)
+local tentativas = 0
+local acertou = false
+
+print("Bem-vindo ao jogo de adivinhação!")
+print("Estou pensando em um número entre 1 e 100.")
+
+while not acertou do
+    io.write("Digite seu palpite: ")
+    local palpite = tonumber(io.read())
+    
+    if not palpite then
+        print("Por favor, digite um número válido.")
+    else
+        tentativas = tentativas + 1
+        
+        if palpite < numeroSecreto then
+            print("Muito baixo! Tente um número maior.")
+        elseif palpite > numeroSecreto then
+            print("Muito alto! Tente um número menor.")
+        else
+            acertou = true
+            print("Parabéns! Você acertou em " .. tentativas .. " tentativas!")
+        end
+    end
+end
+```
+
+### Script para Automatização
+
+**P: Como criar um script para renomear arquivos em um diretório?**
+R:
+```lua
+-- Script para renomear arquivos
+local diretorio = "."  -- Diretório atual
+local prefixo = "arquivo_"
+
+local function listarArquivos(dir)
+    local comando = "dir /b"
+    if package.config:sub(1,1) ~= "\\" then  -- Não é Windows
+        comando = "ls -1"
+    end
+    
+    local arquivos = {}
+    local handle = io.popen(comando .. " " .. dir)
+    for linha in handle:lines() do
+        table.insert(arquivos, linha)
+    end
+    handle:close()
+    
+    return arquivos
+end
+
+local function renomearArquivos(arquivos)
+    for i, arquivo in ipairs(arquivos) do
+        -- Ignora diretórios e arquivos que já têm o prefixo
+        if not arquivo:match("^" .. prefixo) and not io.open(arquivo, "r"):read(0) then
+            local novoNome = prefixo .. i .. "_" .. arquivo
+            os.rename(arquivo, novoNome)
+            print(arquivo .. " -> " .. novoNome)
+        end
+    end
+end
+
+local arquivos = listarArquivos(diretorio)
+renomearArquivos(arquivos)
+```
+
+### Aplicação Web com Lua
+
+**P: Como criar uma API REST simples com Lua e o framework Lapis?**
+R:
+```lua
+-- API REST usando Lapis (necessita Lapis instalado)
+local lapis = require("lapis")
+local app = lapis.Application()
+
+-- Banco de dados simulado
+local usuarios = {
+    {id = 1, nome = "João", email = "joao@exemplo.com"},
+    {id = 2, nome = "Maria", email = "maria@exemplo.com"}
+}
+
+-- Rota GET para listar todos os usuários
+app:get("/usuarios", function()
+    return {
+        json = usuarios
+    }
+end)
+
+-- Rota GET para obter um usuário específico
+app:get("/usuarios/:id", function(self)
+    local id = tonumber(self.params.id)
+    for _, usuario in ipairs(usuarios) do
+        if usuario.id == id then
+            return {
+                json = usuario
+            }
+        end
+    end
+    
+    return {
+        status = 404,
+        json = {erro = "Usuário não encontrado"}
+    }
+end)
+
+-- Rota POST para criar um usuário
+app:post("/usuarios", function(self)
+    local params = self.params
+    
+    if not params.nome or not params.email then
+        return {
+            status = 400,
+            json = {erro = "Nome e email são obrigatórios"}
+        }
+    end
+    
+    local novoUsuario = {
+        id = #usuarios + 1,
+        nome = params.nome,
+        email = params.email
+    }
+    
+    table.insert(usuarios, novoUsuario)
+    
+    return {
+        status = 201,
+        json = novoUsuario
+    }
+end)
+
+return app
+```
+
+### Automação de Jogos
+
+**P: Como criar um script Lua para automação em jogos?**
+R:
+```lua
+-- Script de automação para um jogo (pseudocódigo)
+local Jogador = {}
+
+-- Posições de itens no inventário
+local POSICOES = {
+    POCAO_VIDA = {x = 100, y = 150},
+    POCAO_MANA = {x = 150, y = 150},
+    ARMA = {x = 200, y = 150}
+}
+
+-- Coordenadas de NPCs
+local NPCS = {
+    VENDEDOR = {x = 500, y = 300},
+    FERREIRO = {x = 600, y = 350}
+}
+
+-- Funções auxiliares
+function click(x, y)
+    -- Simula um clique na posição x, y
+    print("Clicando em " .. x .. ", " .. y)
+    -- Implementação real dependeria do sistema
+end
+
+function Jogador:usarPocaoVida()
+    click(POSICOES.POCAO_VIDA.x, POSICOES.POCAO_VIDA.y)
+    print("Poção de vida usada")
+end
+
+function Jogador:usarPocaoMana()
+    click(POSICOES.POCAO_MANA.x, POSICOES.POCAO_MANA.y)
+    print("Poção de mana usada")
+end
+
+function Jogador:irAoVendedor()
+    -- Movimentação até o vendedor
+    self:moverPara(NPCS.VENDEDOR.x, NPCS.VENDEDOR.y)
+    click(NPCS.VENDEDOR.x, NPCS.VENDEDOR.y)
+    print("Interagindo com o vendedor")
+end
+
+function Jogador:moverPara(x, y)
+    -- Simula movimento do jogador
+    print("Movendo para " .. x .. ", " .. y)
+    -- Implementação real dependeria do jogo
+end
+
+-- Rotina de farm automático
+function Jogador:iniciarFarm()
+    print("Iniciando rotina de farm")
+    
+    while true do
+        -- Verificar vida e mana
+        local vidaAtual = 70  -- Simulação (em um jogo real seria lido da tela)
+        local manaAtual = 40  -- Simulação
+        
+        if vidaAtual < 50 then
+            self:usarPocaoVida()
+        end
+        
+        if manaAtual < 30 then
+            self:usarPocaoMana()
+        end
+        
+        -- Atacar monstros próximos
+        if self:encontrarMonstro() then
+            self:atacar()
+        else
+            self:procurarMonstros()
+        end
+        
+        -- Verificar inventário
+        if self:inventarioCheio() then
+            self:irAoVendedor()
+            self:venderItens()
+        end
+        
+        -- Pausa para não sobrecarregar
+        os.execute("sleep 1")  -- Pausa de 1 segundo
+    end
+end
+
+function Jogador:encontrarMonstro()
+    -- Simulação: 70% de chance de encontrar monstro
+    return math.random() < 0.7
+end
+
+function Jogador:atacar()
+    print("Atacando monstro")
+    click(POSICOES.ARMA.x, POSICOES.ARMA.y)
+end
+
+function Jogador:procurarMonstros()
+    print("Procurando monstros")
+    self:moverPara(math.random(100, 800), math.random(100, 600))
+end
+
+function Jogador:inventarioCheio()
+    -- Simulação: 20% de chance do inventário estar cheio
+    return math.random() < 0.2
+end
+
+function Jogador:venderItens()
+    print("Vendendo itens")
+    -- Implementação depende do jogo
+end
+
+-- Iniciar bot
+math.randomseed(os.time())
+Jogador:iniciarFarm()
+```
+
+## Scripting para Aplicativos
+
+**P: Como criar um script para automatizar tarefas em editores de texto como o Notepad++?**
+R:
+```lua
+-- Script para Notepad++ (usando o plugin NppExec)
+-- Para converter texto para maiúsculas e salvar
+
+-- Função para converter texto
+function converterParaMaiusculas()
+    -- Obter o texto selecionado
+    editor:beginUndoAction()
+    local texto = editor:getSelText()
+    
+    -- Converter para maiúsculas
+    local textoMaiusculo = string.upper(texto)
+    
+    -- Substituir o texto selecionado
+    editor:replaceSel(textoMaiusculo)
+    editor:endUndoAction()
+end
+
+-- Função para salvar arquivo
+function salvarArquivo()
+    local caminho = "C:\\temp\\arquivo_convertido.txt"
+    local conteudo = editor:getText()
+    
+    -- Abrir arquivo para escrita
+    local arquivo = io.open(caminho, "w")
+    if arquivo then
+        arquivo:write(conteudo)
+        arquivo:close()
+        print("Arquivo salvo em: " .. caminho)
+    else
+        print("Erro ao salvar o arquivo")
+    end
+end
+
+-- Executar as funções
+converterParaMaiusculas()
+salvarArquivo()
+```
+
+## Integração com Sistemas
+
+**P: Como criar um servidor TCP simples em Lua?**
+R:
+```lua
+-- Servidor TCP simples (requer socket.core)
+local socket = require("socket")
+
+-- Criar servidor na porta 8080
+local servidor = assert(socket.bind("*", 8080))
+print("Servidor iniciado na porta 8080")
+
+-- Configurar para modo de bloqueio com timeout
+servidor:settimeout(0.1)
+
+-- Tabela para armazenar clientes conectados
+local clientes = {}
+
+-- Loop principal do servidor
+while true do
+    -- Aceitar novas conexões
+    local cliente, erro = servidor:accept()
+    
+    if cliente then
+        cliente:settimeout(0)
+        print("Novo cliente conectado")
+        table.insert(clientes, cliente)
+    end
+    
+    -- Verificar mensagens de clientes existentes
+    for i, cliente in ipairs(clientes) do
+        local linha, erro = cliente:receive()
+        
+        if linha then
+            print("Mensagem recebida: " .. linha)
+            
+            -- Enviar resposta
+            cliente:send("Recebido: " .. linha .. "\n")
+            
+            -- Verificar comando de saída
+            if linha == "sair" then
+                cliente:close()
+                table.remove(clientes, i)
+                print("Cliente desconectado")
+            end
+        elseif erro ~= "timeout" then
+            -- Erro diferente de timeout indica conexão fechada
+            cliente:close()
+            table.remove(clientes, i)
+            print("Cliente desconectado")
+        end
+    end
+end
+```
+
+## Diferentes Formas de Pedir os Códigos
+
+**P: Me faça um código Lua para calcular o fatorial de um número**
+R:
+```lua
+-- Cálculo de fatorial em Lua
+function fatorial(n)
+    if n == 0 then
+        return 1
+    else
+        return n * fatorial(n - 1)
+    end
+end
+
+print("Digite um número para calcular o fatorial:")
+local numero = tonumber(io.read())
+
+if numero and numero >= 0 then
+    print("O fatorial de " .. numero .. " é " .. fatorial(numero))
+else
+    print("Por favor, digite um número não-negativo válido.")
+end
+```
+
+**P: Poderia fazer um exemplo de código Lua para ordenar uma lista?**
+R:
+```lua
+-- Ordenação de lista em Lua
+-- Implementação do algoritmo QuickSort
+
+function quicksort(arr, inicio, fim)
+    inicio = inicio or 1
+    fim = fim or #arr
+    
+    if inicio < fim then
+        local pivo = particionar(arr, inicio, fim)
+        quicksort(arr, inicio, pivo - 1)
+        quicksort(arr, pivo + 1, fim)
+    end
+    
+    return arr
+end
+
+function particionar(arr, inicio, fim)
+    local pivo = arr[fim]
+    local i = inicio - 1
+    
+    for j = inicio, fim - 1 do
+        if arr[j] <= pivo then
+            i = i + 1
+            arr[i], arr[j] = arr[j], arr[i]
+        end
+    end
+    
+    arr[i + 1], arr[fim] = arr[fim], arr[i + 1]
+    return i + 1
+end
+
+-- Exemplo de uso
+local numeros = {38, 27, 43, 3, 9, 82, 10}
+print("Lista original:")
+for _, v in ipairs(numeros) do
+    io.write(v .. " ")
+end
+io.write("\n")
+
+quicksort(numeros)
+
+print("Lista ordenada:")
+for _, v in ipairs(numeros) do
+    io.write(v .. " ")
+end
+io.write("\n")
+```
+
+**P: Preciso de um script Lua para gerar senhas aleatórias**
+R:
+```lua
+-- Gerador de senhas aleatórias em Lua
+math.randomseed(os.time())  -- Inicializa o gerador de números aleatórios
+
+-- Função para gerar senha
+function gerarSenha(tamanho, incluirMaiusculas, incluirNumeros, incluirEspeciais)
+    local caracteres = "abcdefghijklmnopqrstuvwxyz"
+    
+    if incluirMaiusculas then
+        caracteres = caracteres .. "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    end
+    
+    if incluirNumeros then
+        caracteres = caracteres .. "0123456789"
+    end
+    
+    if incluirEspeciais then
+        caracteres = caracteres .. "!@#$%^&*()-_=+[]{}|;:,.<>?"
+    end
+    
+    local senha = ""
+    local tamanhoCaracteres = string.len(caracteres)
+    
+    for i = 1, tamanho do
+        local indice = math.random(1, tamanhoCaracteres)
+        senha = senha .. string.sub(caracteres, indice, indice)
+    end
+    
+    return senha
+end
+
+-- Configurações para a senha
+local tamanho = 12
+local incluirMaiusculas = true
+local incluirNumeros = true
+local incluirEspeciais = true
+
+-- Gerar e exibir senha
+local senha = gerarSenha(tamanho, incluirMaiusculas, incluirNumeros, incluirEspeciais)
+print("Senha gerada: " .. senha)
+
+-- Função para gerar múltiplas senhas
+function gerarMultiplasSenhas(quantidade, tamanho, incluirMaiusculas, incluirNumeros, incluirEspeciais)
+    local senhas = {}
+    
+    for i = 1, quantidade do
+        table.insert(senhas, gerarSenha(tamanho, incluirMaiusculas, incluirNumeros, incluirEspeciais))
+    end
+    
+    return senhas
+end
+
+-- Gerar 5 senhas diferentes
+print("\nGerando 5 senhas diferentes:")
+local senhas = gerarMultiplasSenhas(5, tamanho, incluirMaiusculas, incluirNumeros, incluirEspeciais)
+for i, senha in ipairs(senhas) do
+    print(i .. ": " .. senha)
+end
+```
+
+**P: Crie um código Lua para analisar um arquivo CSV**
+R:
+```lua
+-- Analisador de arquivos CSV em Lua
+function lerCSV(arquivo, separador, temCabecalho)
+    separador = separador or ","
+    local linhas = {}
+    local cabecalho = {}
+    
+    -- Abrir o arquivo
+    local f = io.open(arquivo, "r")
+    if not f then
+        return nil, "Erro ao abrir o arquivo"
+    end
+    
+    -- Ler o cabeçalho se necessário
+    if temCabecalho then
+        local cabecalhoLinha = f:read()
+        if cabecalhoLinha then
+            for campo in string.gmatch(cabecalhoLinha, "[^" .. separador .. "]+") do
+                table.insert(cabecalho, campo)
+            end
+        end
+    end
+    
+    -- Ler as linhas de dados
+    for linha in f:lines() do
+        local campos = {}
+        for campo in string.gmatch(linha, "[^" .. separador .. "]+") do
+            table.insert(campos, campo)
+        end
+        table.insert(linhas, campos)
+    end
+    
+    f:close()
+    
+    return {
+        cabecalho = cabecalho,
+        dados = linhas
+    }
+end
+
+-- Função para calcular estatísticas básicas de uma coluna numérica
+function estatisticasColuna(dados, indiceColuna)
+    local soma = 0
+    local min = nil
+    local max = nil
+    local count = 0
+    
+    for _, linha in ipairs(dados) do
+        local valor = tonumber(linha[indiceColuna])
+        
+        if valor then
+            soma = soma + valor
+            count = count + 1
+            
+            if not min or valor < min then
+                min = valor
+            end
+            
+            if not max or valor > max then
+                max = valor
+            end
+        end
+    end
+    
+    return {
+        media = count > 0 and soma / count or 0,
+        min = min or 0,
+        max = max or 0,
+        soma = soma,
+        count = count
+    }
+end
+
+-- Exemplo de uso (supondo que exista um arquivo dados.csv)
+local resultado, erro = lerCSV("dados.csv", ",", true)
+
+if resultado then
+    print("Cabeçalho:")
+    for i, campo in ipairs(resultado.cabecalho) do
+        print(i .. ": " .. campo)
+    end
+    
+    print("\nDados (primeiras 5 linhas):")
+    for i = 1, math.min(5, #resultado.dados) do
+        print(table.concat(resultado.dados[i], " | "))
+    end
+    
+    print("\nTotal de linhas: " .. #resultado.dados)
+    
+    -- Calcular estatísticas para a segunda coluna (assumindo que seja numérica)
+    if #resultado.cabecalho >= 2 then
+        local coluna = 2
+        local nomeColuna = resultado.cabecalho[coluna]
+        local stats = estatisticasColuna(resultado.dados, coluna)
+        
+        print("\nEstatísticas para a coluna '" .. nomeColuna .. "':")
+        print("Média: " .. stats.media)
+        print("Mínimo: " .. stats.min)
+        print("Máximo: " .. stats.max)
+        print("Soma: " .. stats.soma)
+        print("Contagem: " .. stats.count)
+    end
+else
+    print("Erro: " .. erro)
+end
+```
+
+**P: Ajude-me com um código Lua para criar uma calculadora simples**
+R:
+```lua
+-- Calculadora simples em Lua
+function calcular(num1, num2, operacao)
+    if operacao == "+" then
+        return num1 + num2
+    elseif operacao == "-" then
+        return num1 - num2
+    elseif operacao == "*" then
+        return num1 * num2
+    elseif operacao == "/" then
+        if num2 == 0 then
+            return nil, "Erro: Divisão por zero"
+        end
+        return num1 / num2
+    elseif operacao == "^" then
+        return num1 ^ num2
+    elseif operacao == "%" then
+        return num1 % num2
+    else
+        return nil, "Operação inválida"
+    end
+end
+
+-- Interface de linha de comando
+function calculadora()
+    print("==== Calculadora Lua ====")
+    print("Operações disponíveis: +, -, *, /, ^, %")
+    print("Digite 'sair' para encerrar")
+    print("==========================")
+    
+    while true do
+        print("\nDigite a expressão (ex:
