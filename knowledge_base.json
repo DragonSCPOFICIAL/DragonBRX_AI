@@ -25,8 +25,18 @@
         "1. \"Você pode explicar o que é inteligência artificial e qual é o seu funcionamento?\"",
         "2. \"Como a inteligência artificial opera e o que ela realmente significa?\""
       ]
+    },
+    {
+      "question": "2. Quais são as principais linguagens de programação usadas em inteligência artificial?",
+      "answer": "As principais linguagens de programação usadas em inteligência artificial incluem:\n\n1. **Python**: É a linguagem mais popular para IA devido à sua simplicidade e à vasta gama de bibliotecas e frameworks, como TensorFlow, Keras, PyTorch, Scikit-learn, entre outros, que facilitam o desenvolvimento de modelos de aprendizado de máquina e deep learning.\n\n2. **R**: Muito utilizada em estatística e análise de dados, R é popular em projetos de IA que envolvem análise de dados complexos e visualização.\n\n3. **Java**: Conhecida por sua portabilidade e escalabilidade, Java é usada em IA para criar sistemas grandes e complexos. Bibliotecas como Weka e Deeplearning4j são exemplos de ferramentas em Java para IA.\n\n4. **C++**: É usada em IA quando a performance é crítica, como em sistemas que exigem processamento em tempo real. C++ é frequentemente usada para otimizar partes de algoritmos de IA.\n\n5. **Julia**: Uma linguagem mais recente, Julia é conhecida por sua alta performance e é usada em IA para tarefas que exigem computação intensiva.\n\n6. **LISP**: Embora menos comum hoje, LISP tem uma longa história na IA e é conhecida por sua flexibilidade e capacidade de manipulação simbólica.\n\n7. **Prolog**: Usada em IA para programação lógica, Prolog é adequada para problemas que envolvem raciocínio lógico e inferência.\n\nEssas linguagens são escolhidas com base em fatores como facilidade de uso, disponibilidade de bibliotecas, eficiência de execução e requisitos específicos do projeto de IA.",
+      "timestamp": "2025-03-12T16:56:39.374192",
+      "variations": [
+        "Claro! Aqui estão três variações da pergunta:",
+        "1. \"2. Quais são as linguagens de programação mais utilizadas no desenvolvimento de inteligência artificial?\"",
+        "2. \"2. Quais linguagens de programação são predominantes na área de inteligência artificial?\""
+      ]
     }
   ],
   "learning_sessions": [],
-  "last_updated": "2025-03-12T16:56:31.152598"
+  "last_updated": "2025-03-12T16:56:44.091029"
 }
