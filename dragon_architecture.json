@@ -15,11 +15,16 @@
       "AI",
       "Aprendizado",
       "Processamento",
-      "sem_categoria"
+      "sem_categoria",
+      "Parece que sua pergunta foi cortada",
+      "mas posso começar explicando o que é inteligência artificial (IA) e como ela funciona de maneira geral.\n\n**O que é Inteligência Artificial?**\n\nInteligência Artificial é um ramo da ciência da computação que se concentra na criação de sistemas capazes de realizar tarefas que normalmente requerem inteligência humana. Isso inclui habilidades como aprendizado",
+      "raciocínio"
     ],
     "edges": [
       "AI→Aprendizado",
-      "Aprendizado→Processamento"
+      "Aprendizado→Processamento",
+      "Parece que sua pergunta foi cortada→mas posso começar explicando o que é inteligência artificial (IA) e como ela funciona de maneira geral.\n\n**O que é Inteligência Artificial?**\n\nInteligência Artificial é um ramo da ciência da computação que se concentra na criação de sistemas capazes de realizar tarefas que normalmente requerem inteligência humana. Isso inclui habilidades como aprendizado",
+      "mas posso começar explicando o que é inteligência artificial (IA) e como ela funciona de maneira geral.\n\n**O que é Inteligência Artificial?**\n\nInteligência Artificial é um ramo da ciência da computação que se concentra na criação de sistemas capazes de realizar tarefas que normalmente requerem inteligência humana. Isso inclui habilidades como aprendizado→raciocínio"
     ]
   }
 }
