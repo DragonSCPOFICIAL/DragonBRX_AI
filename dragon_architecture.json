@@ -14,7 +14,8 @@
     "nodes": [
       "AI",
       "Aprendizado",
-      "Processamento"
+      "Processamento",
+      "sem_categoria"
     ],
     "edges": [
       "AI→Aprendizado",
