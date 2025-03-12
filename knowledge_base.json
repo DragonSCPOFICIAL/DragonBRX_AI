@@ -15,8 +15,18 @@
       "question": "quem e two9",
       "answer": "Two-9 é um coletivo de hip-hop originário de Atlanta, Geórgia, conhecido por sua mistura de rap alternativo e influências do trap. O grupo foi formado em 2009 e inclui vários membros, como Curtis Williams, Jace, CeeJ, e outros. Two-9 ganhou notoriedade na cena musical de Atlanta por suas mixtapes e performances energéticas. Eles também chamaram a atenção de grandes nomes da indústria, o que levou a colaborações e oportunidades de turnê.\n\nO coletivo é conhecido por sua abordagem colaborativa à música, onde os membros frequentemente trabalham juntos em projetos individuais e coletivos. Two-9 assinou com a gravadora de Mike WiLL Made-It, a EarDrummers Entertainment, o que ajudou a aumentar sua visibilidade no cenário musical. Eles são parte de uma nova onda de artistas de Atlanta que têm contribuído para a evolução do som do hip-hop na região.",
       "timestamp": "2025-03-12T15:33:31.951157"
+    },
+    {
+      "question": "1. O que é inteligência artificial e como ela funciona?",
+      "answer": "Inteligência artificial (IA) é um ramo da ciência da computação que se concentra na criação de sistemas capazes de realizar tarefas que normalmente requerem inteligência humana. Isso inclui atividades como reconhecimento de fala, tomada de decisão, tradução de idiomas, reconhecimento de padrões, e muito mais.\n\nA IA funciona através de algoritmos e modelos matemáticos que permitem que as máquinas processem informações, aprendam com dados e tomem decisões baseadas nesses aprendizados. Existem várias abordagens e técnicas dentro da IA, incluindo:\n\n1. **Aprendizado de Máquina (Machine Learning)**: Uma subárea da IA que envolve o desenvolvimento de algoritmos que permitem que as máquinas aprendam a partir de dados. Isso inclui técnicas como aprendizado supervisionado, não supervisionado e por reforço.\n\n2. **Redes Neurais Artificiais**: Inspiradas na estrutura do cérebro humano, essas redes são compostas por camadas de nós (neurônios artificiais) que processam informações e são usadas para tarefas complexas como reconhecimento de imagem e processamento de linguagem natural.\n\n3. **Processamento de Linguagem Natural (PLN)**: Focado na interação entre computadores e linguagem humana, permitindo que as máquinas compreendam, interpretem e respondam a texto e fala em linguagem natural.\n\n4. **Visão Computacional**: Capacita as máquinas a interpretar e entender o mundo visual, analisando imagens e vídeos para identificar objetos, rostos, e outras características.\n\n5. **Sistemas Especialistas**: Programas que utilizam conhecimento especializado para tomar decisões em áreas específicas, simulando a expertise de um humano em um domínio particular.\n\nA IA funciona através de um ciclo contínuo de coleta de dados, processamento, aprendizado, e ajuste de modelos para melhorar a precisão e eficácia das tarefas realizadas. Com o avanço da tecnologia e o aumento da capacidade computacional, a IA continua a evoluir, expandindo suas aplicações em diversas áreas como saúde, finanças, transporte, e entretenimento.",
+      "timestamp": "2025-03-12T16:56:17.662003",
+      "variations": [
+        "Claro! Aqui estão três variações da pergunta:",
+        "1. \"Você pode explicar o que é inteligência artificial e qual é o seu funcionamento?\"",
+        "2. \"Como a inteligência artificial opera e o que ela realmente significa?\""
+      ]
     }
   ],
   "learning_sessions": [],
-  "last_updated": "2025-03-12T15:33:35.675841"
+  "last_updated": "2025-03-12T16:56:31.152598"
 }
