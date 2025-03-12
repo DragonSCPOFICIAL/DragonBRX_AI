@@ -1,0 +1,24 @@
+{
+  "core_modules": [
+    "brain",
+    "deep_think",
+    "mega_text",
+    "knowledge_manager"
+  ],
+  "optimization_modules": [],
+  "training_data": {},
+  "version_history": [
+    "0.1.0-beta"
+  ],
+  "knowledge_graph": {
+    "nodes": [
+      "AI",
+      "Aprendizado",
+      "Processamento"
+    ],
+    "edges": [
+      "AI→Aprendizado",
+      "Aprendizado→Processamento"
+    ]
+  }
+}
